@@ -52,6 +52,7 @@
     <build>
         <plugins>
             <plugin>
+                <finalName>ziyi_master-0.0.1-SNAPSHOT</finalName>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.1</version>
