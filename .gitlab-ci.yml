@@ -3,7 +3,7 @@ variables:
   PORT: "9901" #运行在服务器的端口
   JAVA_OPTS: "" #jvm的参数，可不设置
   SPRING_OPTS: "" #spring的参数，可不设置
-  JAR_PATH: "admin"#打包jar的路径
+  JAR_PATH: "/admin"#打包jar的路径
   JAR_NAME: "admin.jar" #编译出的jar文件名称
   PROJECT_PATH: "/project/ziyi_master" #项目运行的目录
 stages:
