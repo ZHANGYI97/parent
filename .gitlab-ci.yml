@@ -3,7 +3,8 @@ variables:
   PORT: "9901" #运行在服务器的端口
   JAVA_OPTS: "" #jvm的参数，可不设置
   SPRING_OPTS: "" #spring的参数，可不设置
-  JAR_NAME: "ziyi_master-0.0.1-SNAPSHOT.jar" #编译出的jar文件名称
+  JAR_PATH: "admin"#打包jar的路径
+  JAR_NAME: "admin.jar" #编译出的jar文件名称
   PROJECT_PATH: "/project/ziyi_master" #项目运行的目录
 stages:
 - auto_deploy
@@ -17,7 +18,7 @@ build_and_start:
   - echo "============上传代码============"
   - bash /home/gitlab-runner/script/prepare.sh "$PROJECT_NAME" "$JAR_NAME" "$PROJECT_PATH"
   - echo "============上传代码完毕，开始打包============"
-  - bash /home/gitlab-runner/script/package.sh "$PROJECT_NAME" "$JAR_NAME" "$PROJECT_PATH"
+  - bash /home/gitlab-runner/script/package.sh "$PROJECT_NAME" "$JAR_NAME" "$PROJECT_PATH" "$JAR_PATH"
   - echo "============打包完毕，开始运行============"
   - bash /home/gitlab-runner/script/run.sh "$JAR_NAME" "$PROJECT_PATH" "$PORT" "$JAVA_POTS" "$SPRING_OPTS"
   when: manual
