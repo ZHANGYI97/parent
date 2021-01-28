@@ -1,6 +1,6 @@
 package com.ziyi.common.http;
 
-import com.ziyi.common.base.BaseException;
+import com.ziyi.common.base.exception.util.BaseException;
 import com.ziyi.common.string.StringUtils;
 import okhttp3.*;
 import okhttp3.logging.HttpLoggingInterceptor;

@@ -1,4 +1,4 @@
-package com.ziyi.common.base;
+package com.ziyi.common.base.exception.util;
 
 public class BaseException extends Exception {
 
@@ -16,6 +16,11 @@ public class BaseException extends Exception {
         super(code + "-" + reason);
         this.code = code;
         this.reason = reason;
+    }
+
+    public BaseException(Throwable e)
+    {
+        super(e.getMessage(), e);
     }
 
 }

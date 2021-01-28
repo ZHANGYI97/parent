@@ -10,7 +10,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 /**
- * 时间格式化
+ * 时间格式化 使用jdk自带原生的时间
  */
 public class DateTimeUtils {
 
