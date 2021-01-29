@@ -15,8 +15,8 @@ public class TestScheduleForSimple {
     private void process(){
         if (logger.isDebugEnabled()) {
             logger.debug("Schedule success");
+            System.out.println("TestScheduleForSimple Schedule , Now Date:"+ DateTimeUtils.nowDate());
         }
-        System.out.println("TestScheduleForSimple Schedule , Now Date:"+ DateTimeUtils.nowDate());
     }
 
 }

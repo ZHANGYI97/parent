@@ -16,8 +16,8 @@ public class TestSchedule {
     public void work(){
         if (logger.isDebugEnabled()) {
             logger.debug("Schedule success");
+            System.out.println("Test Schedule , Now Date:"+ DateTimeUtils.nowDate());
         }
-        System.out.println("Test Schedule , Now Date:"+ DateTimeUtils.nowDate());
     }
 
 }
