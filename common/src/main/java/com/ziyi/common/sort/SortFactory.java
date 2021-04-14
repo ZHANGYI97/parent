@@ -20,8 +20,8 @@ public class SortFactory {
      * 排序方法
      * @return
      */
-    public int[] sort(){
-        return sort.sort();
+    public int[] sort(int[] arg){
+        return sort.sort(arg);
     }
 
 }

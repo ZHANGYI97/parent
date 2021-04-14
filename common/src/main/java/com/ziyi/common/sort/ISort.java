@@ -6,6 +6,6 @@ package com.ziyi.common.sort;
  */
 public interface ISort {
 
-    public int[] sort();
+    public int[] sort(int[] arg);
 
 }
