@@ -52,6 +52,12 @@
 
         <dependency>
             <groupId>com.ziyi</groupId>
+            <artifactId>redis</artifactId>
+            <version>${ziyi.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.ziyi</groupId>
             <artifactId>dao</artifactId>
             <version>${ziyi.version}</version>
         </dependency>
