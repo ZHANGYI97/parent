@@ -8,6 +8,7 @@
         <module>admin</module>
         <module>common</module>
         <module>quartz</module>
+        <module>mq</module>
         <module>dao</module>
     </modules>
 

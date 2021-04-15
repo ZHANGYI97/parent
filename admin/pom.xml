@@ -52,6 +52,12 @@
 
         <dependency>
             <groupId>com.ziyi</groupId>
+            <artifactId>mq</artifactId>
+            <version>${ziyi.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.ziyi</groupId>
             <artifactId>dao</artifactId>
             <version>${ziyi.version}</version>
         </dependency>
