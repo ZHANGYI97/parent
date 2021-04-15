@@ -19,6 +19,9 @@ mybatis:
 
 logging:
   level:
+    org:
+      springframework:
+        web: trace
     com:
       ziyi:
         mapper: debug
@@ -38,3 +41,16 @@ ziyi:
   addressEnabled: false
   # 验证码类型 math 数组计算 char 字符验证
   captchaType: math
+
+thread-pool:
+  default:
+    core-pool-size: 50
+    max-pool-size: 100
+    queue-capacity: 50
+    keep-alive-seconds: 60
+    thread-name-prefix: thread-
+
+rocketmq:
+  name-server: 127.0.0.1:9876
+  producer:
+    group: my-producer-group

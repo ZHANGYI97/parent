@@ -1,4 +1,4 @@
-package com.ziyi.common.rocketmq;
+package com.ziyi.mq.rocketmq;
 
 import org.apache.rocketmq.spring.annotation.RocketMQMessageListener;
 import org.apache.rocketmq.spring.core.RocketMQListener;
