@@ -15,7 +15,7 @@ import java.util.regex.Pattern;
 public class String2Int {
 
     public static void main(String[] args) {
-        String s = "42";
+        String s = " -42";
         System.out.println(myAtoi(s));
     }
 
@@ -23,7 +23,7 @@ public class String2Int {
         //1.去掉头尾空格
         s = s.trim();
         long resultLong = 0;
-        if (StringUtils.isNotEmpty(s)) {
+        if (!("".equals(s) || s == null)) {
             //2.判断正负
             boolean flag = isSize(s);
             //3.读取有效数字
@@ -43,7 +43,7 @@ public class String2Int {
      * @return
      */
     public static boolean isSize(String s) {
-        if ("-".equals(s.charAt(0))) {
+        if ("-".equals(String.valueOf(s.charAt(0)))) {
             return false;
         } else {
             return true;
@@ -59,9 +59,9 @@ public class String2Int {
     public static long getRealNumber(String s) {
         boolean flag = false;
         StringBuilder builder = new StringBuilder();
-        Pattern pattern = Pattern.compile("^[-\\+]?[\\d]*$");
+        String pattern = "0123456789";
         for (int i = 0; i < s.length(); i++) {
-            if (pattern.matcher(String.valueOf(s.charAt(i))).matches()) {
+            if (pattern.contains(String.valueOf(s.charAt(i)))) {
                 //是数字
                 builder.append(s.charAt(i));
                 flag = true;
@@ -71,7 +71,7 @@ public class String2Int {
                 }
             }
         }
-        if (StringUtils.isEmpty(builder.toString())){
+        if (builder.toString()==null || "".equals(builder.toString())){
             return 0;
         } else {
             return Long.valueOf(builder.toString());
