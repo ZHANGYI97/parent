@@ -1,4 +1,4 @@
-package com.ziyi.common.thread;
+package com.ziyi.common.thread.callable;
 
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.FutureTask;
