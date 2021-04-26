@@ -2,7 +2,8 @@
 <configuration debug="false" scan="false">
 
     <!-- Log file path -->
-    <property name="log.path" value="E:/home/logs" />
+    <!--<property name="log.path" value="E:/home/logs" />-->
+    <property name="log.path" value="/Users/zhy/workspace/my/log" />
 
     <!-- Console log output -->
     <appender name="console"
