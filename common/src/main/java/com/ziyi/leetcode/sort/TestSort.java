@@ -12,7 +12,10 @@ public class TestSort {
         //ISort sort = new BubbleSort();
         //选择排序
         //ISort sort = new SelectSort();
-        ISort sort = new InsertSort();
+        //插入排序
+        //ISort sort = new InsertSort();
+        //希尔排序
+        ISort sort = new ShellSort();
         SortFactory sortFactory = SortFactory.getInstance(sort);
         int [] result = sortFactory.sort(arg);
         print(result);
