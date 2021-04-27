@@ -1,4 +1,4 @@
-package com.ziyi.common.thread;
+package com.ziyi.common.thread.thread;
 
 /**
  * auther:jurzis

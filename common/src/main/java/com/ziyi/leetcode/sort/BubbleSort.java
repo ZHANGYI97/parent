@@ -1,4 +1,4 @@
-package com.ziyi.common.sort;
+package com.ziyi.leetcode.sort;
 
 /**
  * auther:jurzis 冒泡排序
@@ -6,6 +6,13 @@ package com.ziyi.common.sort;
  */
 public class BubbleSort implements ISort{
 
+    /**
+     * 排序方式是：多次循环，每次比较两个数，若前一个数大于后一个数，则交换顺序
+     *             循环找到每个数的位置
+     *             时间复杂度：最好（O（n））,最差（O（n2））
+     * @param arg
+     * @return
+     */
     @Override
     public int[] sort(int[] arg) {
         int temp;

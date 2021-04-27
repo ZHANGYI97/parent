@@ -1,4 +1,4 @@
-package com.ziyi.common.sort;
+package com.ziyi.leetcode.sort;
 
 /**
  * auther:jurzis 排序算法，从小到大排列

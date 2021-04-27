@@ -1,4 +1,4 @@
-package com.ziyi.common.sort;
+package com.ziyi.leetcode.sort;
 
 /**
  * auther:jurzis

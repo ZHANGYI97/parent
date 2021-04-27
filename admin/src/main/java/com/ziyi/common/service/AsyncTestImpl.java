@@ -24,8 +24,8 @@ public class AsyncTestImpl implements AsyncTest{
     public Future<String> testAsync(CountDownLatch countDownLatch) {
         try {
             logger.info("线程：" + Thread.currentThread().getName() + "在执行");
-            //Thread.sleep(1000);
-            /*return new Result(200, "success", Thread.currentThread());*/
+            //JoinThread.sleep(1000);
+            /*return new Result(200, "success", JoinThread.currentThread());*/
             return new AsyncResult<String>(Thread.currentThread().getName());
         } catch (Exception e) {
             e.printStackTrace();
