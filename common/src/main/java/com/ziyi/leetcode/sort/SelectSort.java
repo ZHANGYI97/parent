@@ -15,6 +15,7 @@ public class SelectSort implements ISort{
      */
     @Override
     public int[] sort(int[] arg) {
+        int x;
         for (int i = 0; i < arg.length; i++) {
             int temp = i;
             for (int j = i+1; j < arg.length; j++) {
@@ -23,9 +24,9 @@ public class SelectSort implements ISort{
                 }
             }
             if (temp != i) {
-                temp = arg[i];
+                x = arg[i];
                 arg[i] = arg[temp];
-                arg[temp] = temp;
+                arg[temp] = x;
             }
         }
         return arg;

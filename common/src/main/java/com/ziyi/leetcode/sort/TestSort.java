@@ -11,7 +11,8 @@ public class TestSort {
         //冒泡排序
         //ISort sort = new BubbleSort();
         //选择排序
-        ISort sort = new SelectSort();
+        //ISort sort = new SelectSort();
+        ISort sort = new InsertSort();
         SortFactory sortFactory = SortFactory.getInstance(sort);
         int [] result = sortFactory.sort(arg);
         print(result);
