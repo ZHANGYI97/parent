@@ -15,7 +15,8 @@ public class TestSort {
         //插入排序
         //ISort sort = new InsertSort();
         //希尔排序
-        ISort sort = new ShellSort();
+        //ISort sort = new ShellSort();
+        ISort sort = new QuickSort();
         SortFactory sortFactory = SortFactory.getInstance(sort);
         int [] result = sortFactory.sort(arg);
         print(result);
