@@ -12,6 +12,12 @@ spring:
     port: 25
     username: jurzis@163.com
     password: WIZUXAUEHNPXLOPW
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    ###密码windows
+    password: 123456
+    connect-timeout: 30000
 
 mybatis:
   mapper-locations: classpath:mapping/*/*.xml
