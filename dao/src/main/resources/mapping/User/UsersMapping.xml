@@ -14,8 +14,12 @@
         <result column="modify_user" jdbcType="INTEGER" property="modifyUser" />
     </resultMap>
 
-    <select id="selectOne" resultType="com.ziyi.entity.Users">
+    <select id="selectOne" resultMap="BaseResultMap">
         select * from users where user_id = '1'
+    </select>
+
+    <select id="select" resultMap="BaseResultMap">
+        select * from users where user_name = #{name} and salt = #{salt}
     </select>
 
 </mapper>

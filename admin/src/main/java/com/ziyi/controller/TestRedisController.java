@@ -26,7 +26,7 @@ public class TestRedisController {
     }
 
     @PostMapping("/testParam")
-    public Users testParam(@RequestParam String name, @RequestParam String salt){
+    public Users testParam(@RequestParam("name") String name, @RequestParam("salt") String salt){
         return redisTestService.methodTest2(name, salt);
     }
 }

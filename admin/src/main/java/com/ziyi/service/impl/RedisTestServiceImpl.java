@@ -23,7 +23,7 @@ public class RedisTestServiceImpl implements RedisTestService {
     private UsersMapper usersMapper;
 
     @Override
-    @RedisCacheable(key = "'gof:com:test'",firstLayerTtl = 20L,secondLayerTtl = 10L)
+    @RedisCacheable(key = "'ziyi:com'",firstLayerTtl = 20L,secondLayerTtl = 10L)
     public Users methodTest1() {
         log.info("-- 查询开始");
         // 这里处理未命中缓存时，查询数据库的逻辑
@@ -34,7 +34,7 @@ public class RedisTestServiceImpl implements RedisTestService {
     }
 
     @Override
-    @RedisCacheable(key = "'gof:com:test:'.concat(#name).concat(#salt)",firstLayerTtl = 20L,secondLayerTtl = 10L)
+    @RedisCacheable(key = "'ziyi:com:'.concat(#name).concat(#salt)",firstLayerTtl = 20L,secondLayerTtl = 10L)
     public Users methodTest2(String name, String salt) {
         log.info("-- 查询开始");
         // 这里处理未命中缓存时，查询数据库的逻辑
