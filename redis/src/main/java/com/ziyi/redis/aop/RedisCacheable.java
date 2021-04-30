@@ -22,4 +22,10 @@ public @interface RedisCacheable {
     /** Redis key 值 **/
     String key();
 
+    /**类型，String,hash等**/
+    String type();
+
+    /**为hsah时传入可以推送单条hash**/
+    String filed();
+
 }
