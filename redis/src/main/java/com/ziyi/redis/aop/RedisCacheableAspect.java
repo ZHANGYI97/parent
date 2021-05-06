@@ -1,5 +1,6 @@
 package com.ziyi.redis.aop;
 
+import com.ziyi.common.Constants.Constants;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -39,6 +40,11 @@ public class RedisCacheableAspect {
     public void RedisCacheablePointcut(RedisCacheable redisCacheable) {
     }
 
+    /**
+     * 获取注解上方法的各个参数
+     * @param joinPoint
+     * @return
+     */
     private StandardEvaluationContext getContextContainingArguments(ProceedingJoinPoint joinPoint) {
         StandardEvaluationContext context = new StandardEvaluationContext();
         // 通过Java反射，解析ProceedingJoinPoint的方法参数及参数值
@@ -69,11 +75,36 @@ public class RedisCacheableAspect {
         long secondLayerTtl = redisCacheable.secondLayerTtl();
         // 获取注解中的 key 值
         String key = redisCacheable.key();
+        //获得注解中的type值
+        String type = redisCacheable.type();
+        //获得注解所在方法上的各个参数
         StandardEvaluationContext context = this.getContextContainingArguments(joinPoint);
+        //拼接得到缓存key
         String cacheKey = this.getCacheKeyFromAnnotationKeyValue(context, key);
         log.info("### Cache key: {}", cacheKey);
-        // 获取系统当前时间
-        long start = System.currentTimeMillis();
+        Object result = null;
+        switch (type) {
+            case Constants.STRING:
+                //string类型数据
+                result = pushStringToRedis(cacheKey, firstLayerTtl, secondLayerTtl, joinPoint);
+                break;
+            case Constants.HASH:
+                //hash类型数据
+                result = pushHashToRedis(cacheKey, firstLayerTtl, secondLayerTtl, joinPoint);
+                break;
+            default:
+                break;
+        }
+        log.info("Result: {}", result);
+        return result;
+    }
+
+    private Object pushHashToRedis(String cacheKey, long firstLayerTtl, long secondLayerTtl, ProceedingJoinPoint joinPoint) throws Throwable{
+
+        return new Object();
+    }
+
+    private Object pushStringToRedis(String cacheKey, long firstLayerTtl, long secondLayerTtl, ProceedingJoinPoint joinPoint) throws Throwable{
         Object result;
         // 如果缓存中存在 当前 key 的数据
         if (this.redisTemplate.hasKey(cacheKey)) {
@@ -97,10 +128,6 @@ public class RedisCacheableAspect {
             // 将查询结果放入 Redis 缓存，并设置过期时间，过期时间为 第一过期时间+第二过期时间
             this.redisTemplate.opsForValue().set(cacheKey, result, firstLayerTtl + secondLayerTtl, TimeUnit.MINUTES);
         }
-        // 获取执行时间
-        long executionTime = System.currentTimeMillis() - start;
-        log.info("{} executed in {} ms", joinPoint.getSignature(), executionTime);
-        log.info("Result: {}", result);
         return result;
     }
 

@@ -1,5 +1,8 @@
 package com.ziyi.redis.aop;
 
+import com.ziyi.common.Constants.Constants;
+import com.ziyi.redis.enums.RedisTypeEnum;
+
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -23,9 +26,9 @@ public @interface RedisCacheable {
     String key();
 
     /**类型，String,hash等**/
-    String type();
+    String type() default Constants.STRING;
 
     /**为hsah时传入可以推送单条hash**/
-    String filed();
+    String filed() default Constants.NULL;
 
 }
