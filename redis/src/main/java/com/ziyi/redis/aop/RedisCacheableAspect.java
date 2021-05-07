@@ -1,6 +1,7 @@
 package com.ziyi.redis.aop;
 
 import com.ziyi.common.Constants.Constants;
+import com.ziyi.common.string.StringUtils;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -42,19 +43,20 @@ public class RedisCacheableAspect {
 
     /**
      * 获取注解上方法的各个参数
+     *
      * @param joinPoint
      * @return
      */
     private StandardEvaluationContext getContextContainingArguments(ProceedingJoinPoint joinPoint) {
         StandardEvaluationContext context = new StandardEvaluationContext();
         // 通过Java反射，解析ProceedingJoinPoint的方法参数及参数值
-        CodeSignature codeSignature = (CodeSignature)joinPoint.getSignature();
+        CodeSignature codeSignature = (CodeSignature) joinPoint.getSignature();
         // 获取入参对象中的所有参数名
         String[] parameterNames = codeSignature.getParameterNames();
         // 获取连接点（joinPoint）的方法运行时的入参列表
         Object[] args = joinPoint.getArgs();
 
-        for(int i = 0; i < parameterNames.length; ++i) {
+        for (int i = 0; i < parameterNames.length; ++i) {
             context.setVariable(parameterNames[i], null == args[i] ? "null" : args[i]);
         }
 
@@ -62,9 +64,13 @@ public class RedisCacheableAspect {
     }
 
     private String getCacheKeyFromAnnotationKeyValue(StandardEvaluationContext context, String key) {
-        // 表达式解析器，解析注解中的 key 值
-        Expression expression = expressionParser.parseExpression(key);
-        return (String)expression.getValue(context);
+        if (StringUtils.isNotEmpty(key)) {
+            // 表达式解析器，解析注解中的 key 值
+            Expression expression = expressionParser.parseExpression(key);
+            return (String) expression.getValue(context);
+        } else {
+            return null;
+        }
     }
 
     @Around("RedisCacheablePointcut(redisCacheable)")
@@ -81,16 +87,19 @@ public class RedisCacheableAspect {
         StandardEvaluationContext context = this.getContextContainingArguments(joinPoint);
         //拼接得到缓存key
         String cacheKey = this.getCacheKeyFromAnnotationKeyValue(context, key);
+        //获得缓存fild
+        String aopFild = redisCacheable.filed();
+        String filed = this.getCacheKeyFromAnnotationKeyValue(context, aopFild);
         log.info("### Cache key: {}", cacheKey);
         Object result = null;
         switch (type) {
             case Constants.STRING:
                 //string类型数据
-                result = pushStringToRedis(cacheKey, firstLayerTtl, secondLayerTtl, joinPoint);
+                result = this.pushObjectToRedis(cacheKey, firstLayerTtl, secondLayerTtl, joinPoint);
                 break;
             case Constants.HASH:
                 //hash类型数据
-                result = pushHashToRedis(cacheKey, firstLayerTtl, secondLayerTtl, joinPoint);
+                result = this.pushHashToRedis(cacheKey, firstLayerTtl, secondLayerTtl, joinPoint, filed);
                 break;
             default:
                 break;
@@ -99,12 +108,50 @@ public class RedisCacheableAspect {
         return result;
     }
 
-    private Object pushHashToRedis(String cacheKey, long firstLayerTtl, long secondLayerTtl, ProceedingJoinPoint joinPoint) throws Throwable{
-
-        return new Object();
+    /**
+     * 添加hash类型数据到数据库中
+     *
+     * @param cacheKey
+     * @param firstLayerTtl
+     * @param secondLayerTtl
+     * @param joinPoint
+     * @return
+     * @throws Throwable
+     */
+    private Object pushHashToRedis(String cacheKey, long firstLayerTtl, long secondLayerTtl, ProceedingJoinPoint joinPoint, String filed) throws Throwable {
+        Object result;
+        if (StringUtils.isEmpty(filed)) {
+            //filed为空，推送整个数据 todo hash是否可以用string的推送
+            result = this.pushObjectToRedis(cacheKey, firstLayerTtl, secondLayerTtl, joinPoint);
+        } else {
+            //filed不为空，推送单条数据
+            // 如果缓存中存在 当前 key filed的数据
+            if (this.redisTemplate.opsForHash().hasKey(cacheKey, filed)) {
+                // 通过 key 获取 redis 缓存值
+                result = this.redisTemplate.opsForHash().get(cacheKey, filed);
+                log.info("Reading from cache ..." + result.toString());
+            } else {
+                //执行方法，然后推送缓存
+                result = joinPoint.proceed();
+                log.info("Cache miss: Called original method");
+                // 将查询结果放入 Redis 缓存，并设置过期时间，过期时间为 第一过期时间+第二过期时间
+                this.redisTemplate.opsForHash().put(cacheKey, filed, result);
+            }
+        }
+        return result;
     }
 
-    private Object pushStringToRedis(String cacheKey, long firstLayerTtl, long secondLayerTtl, ProceedingJoinPoint joinPoint) throws Throwable{
+    /**
+     * 添加string类型元素到redis中
+     *
+     * @param cacheKey
+     * @param firstLayerTtl
+     * @param secondLayerTtl
+     * @param joinPoint
+     * @return
+     * @throws Throwable
+     */
+    private Object pushObjectToRedis(String cacheKey, long firstLayerTtl, long secondLayerTtl, ProceedingJoinPoint joinPoint) throws Throwable {
         Object result;
         // 如果缓存中存在 当前 key 的数据
         if (this.redisTemplate.hasKey(cacheKey)) {

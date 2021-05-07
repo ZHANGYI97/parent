@@ -11,4 +11,6 @@ public interface UsersMapper {
 
     Users select(@Param("name") String name, @Param("salt") String salt);
 
+    Users selectByName(@Param("name") String name);
+
 }

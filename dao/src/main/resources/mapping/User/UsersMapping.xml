@@ -22,4 +22,8 @@
         select * from users where user_name = #{name} and salt = #{salt}
     </select>
 
+    <select id="selectByName" resultMap="BaseResultMap">
+        select * from users where user_name = #{name}
+    </select>
+
 </mapper>
