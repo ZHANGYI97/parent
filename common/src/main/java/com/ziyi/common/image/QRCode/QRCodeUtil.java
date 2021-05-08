@@ -22,7 +22,7 @@ public class QRCodeUtil {
 
     public static void main(String[] args) {
         //生成二维码
-        String content= "王曼曼还不下班，别忙了，别猝死了";
+        String content= "志文还不下班，别忙了，别猝死了";
         String imgPath="/Users/zhy/Desktop/images/log.png";
         String destPath ="/Users/zhy/Desktop/images";
         System.out.println("logo图片地址imgPath=="+imgPath);
