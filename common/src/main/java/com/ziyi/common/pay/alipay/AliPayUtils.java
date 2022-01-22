@@ -17,13 +17,14 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.Resource;
 import java.math.BigDecimal;
 
 @Component
 @Slf4j
 public class AliPayUtils {
 
-    @Autowired
+    //todo
     private AlipayClient alipayClient;
 
     /**

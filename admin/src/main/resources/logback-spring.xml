@@ -65,6 +65,6 @@
 
     <!-- Project level setting -->
     <!-- <logger name="your.package" level="DEBUG" /> -->
-    <logger name="org.springframework" level="INFO"></logger>
-    <logger name="org.mybatis" level="INFO"></logger>
+    <logger name="org.springframework" level="ERROR"></logger>
+    <logger name="org.mybatis" level="ERROR"></logger>
 </configuration>
