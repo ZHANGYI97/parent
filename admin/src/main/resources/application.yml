@@ -4,3 +4,9 @@ spring:
 
 logging:
   config: classpath:logback-spring.xml
+
+netty:
+  port: 6789
+  host: 127.0.0.1
+  port1: 6790
+
