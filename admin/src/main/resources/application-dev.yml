@@ -39,7 +39,7 @@ logging:
   level:
     org:
       springframework:
-        web: trace
+        web: info
     com:
       ziyi:
         mapper: debug

@@ -22,6 +22,23 @@
             <artifactId>api</artifactId>
             <version>${ziyi.version}</version>
         </dependency>
+
+        <dependency>
+            <groupId>com.ziyi</groupId>
+            <artifactId>common</artifactId>
+            <version>${ziyi.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-mongodb</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>cn.craccd</groupId>
+            <artifactId>mongoHelper</artifactId>
+            <version>0.6.9</version>
+        </dependency>
     </dependencies>
 
 </project>

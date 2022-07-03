@@ -14,19 +14,26 @@
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
+        <ziyi.version>0.0.1-SNAPSHOT</ziyi.version>
     </properties>
 
     <dependencies>
         <dependency>
             <groupId>com.ziyi</groupId>
             <artifactId>common</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
+            <version>${ziyi.version}</version>
         </dependency>
 
         <dependency>
             <groupId>com.ziyi</groupId>
             <artifactId>redis</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
+            <version>${ziyi.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.ziyi</groupId>
+            <artifactId>redis</artifactId>
+            <version>${ziyi.version}</version>
         </dependency>
     </dependencies>
 

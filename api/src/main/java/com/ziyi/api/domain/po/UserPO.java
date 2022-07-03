@@ -9,7 +9,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
  */
 @Data
 @Document
-public class UserPO {
+public class UserPO extends MongoPO {
 
     private String id;
 

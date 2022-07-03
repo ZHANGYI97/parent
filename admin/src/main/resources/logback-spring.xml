@@ -144,6 +144,18 @@
         </encoder>
     </appender>-->
 
+    <logger name="com.ziyi" level="INFO"/>
+    <logger name="com.alibaba" level="WARN"/>
+    <Logger name="com.netflix" level="WARN"/>
+    <Logger name="com.netflix.discovery.DiscoveryClient" level="ERROR"/>
+    <Logger name="org.apache" level="WARN"/>
+    <logger name="org.eclipse" level="WARN"/>
+    <Logger name="org.hibernate" level="WARN"/>
+    <Logger name="org.mongodb" level="WARN"/>
+    <Logger name="org.quartz" level="WARN"/>
+    <logger name="org.springframework" level="WARN"/>
+    <logger name="org.springframework.cloud.netflix.eureka.serviceregistry.EurekaServiceRegistry" level="INFO"/>
+
     <root level="info">
         <appender-ref ref="CONSOLE"/>
         <appender-ref ref="FILE_INFO"/>
