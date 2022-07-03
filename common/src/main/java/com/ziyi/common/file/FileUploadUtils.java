@@ -1,13 +1,13 @@
 package com.ziyi.common.file;
 
 
-import com.ziyi.common.Constants.GenConstants;
+import com.ziyi.common.constants.GenConstants;
 import com.ziyi.common.base.exception.file.FileNameLengthLimitExceededException;
 import com.ziyi.common.base.exception.file.FileSizeLimitExceededException;
 import com.ziyi.common.base.exception.file.InvalidExtensionException;
 import com.ziyi.common.date.DateUtils;
-import com.ziyi.common.uuid.IdUtils;
-import com.ziyi.config.FileConfig;
+import com.ziyi.common.propertits.FilePropertits;
+import com.ziyi.common.uuid.IdGenUtils;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
@@ -35,7 +35,7 @@ public class FileUploadUtils
     /**
      * 默认上传的地址
      */
-    private static String defaultBaseDir = FileConfig.getProfile();
+    private static String defaultBaseDir = FilePropertits.getProfile();
 
     public static void setDefaultBaseDir(String defaultBaseDir)
     {
@@ -125,7 +125,7 @@ public class FileUploadUtils
     {
         String fileName = file.getOriginalFilename();
         String extension = getExtension(file);
-        fileName = DateUtils.datePath() + "/" + IdUtils.fastUUID() + "." + extension;
+        fileName = DateUtils.datePath() + "/" + IdGenUtils.uuidGen().uuid() + "." + extension;
         return fileName;
     }
 
@@ -146,7 +146,7 @@ public class FileUploadUtils
 
     private static final String getPathFileName(String uploadDir, String fileName) throws IOException
     {
-        int dirLastIndex = FileConfig.getProfile().length() + 1;
+        int dirLastIndex = FilePropertits.getProfile().length() + 1;
         String currentDir = StringUtils.substring(uploadDir, dirLastIndex);
         String pathFileName = GenConstants.RESOURCE_PREFIX + "/" + currentDir + "/" + fileName;
         return pathFileName;

@@ -1,8 +1,8 @@
 package com.ziyi.util;
 
 import com.ziyi.base.Response;
+import com.ziyi.common.propertits.BeanFactory;
 import com.ziyi.common.string.StringUtils;
-import com.ziyi.config.BeanFactory;
 import com.ziyi.entity.Schedule.ScheduleJob;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

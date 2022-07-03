@@ -11,6 +11,10 @@
         <module>mq</module>
         <module>redis</module>
         <module>dao</module>
+        <module>elasticsearch</module>
+        <module>mongodb</module>
+        <module>api</module>
+        <module>config</module>
     </modules>
 
     <parent>

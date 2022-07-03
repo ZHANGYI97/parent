@@ -1,16 +1,16 @@
 package com.ziyi.common.ip;
 
 import com.alibaba.fastjson.JSONObject;
-import com.ziyi.common.Constants.GenConstants;
+import com.ziyi.common.constants.GenConstants;
 import com.ziyi.common.http.HttpUtils;
+import com.ziyi.common.propertits.FilePropertits;
 import com.ziyi.common.string.StringUtils;
-import com.ziyi.config.FileConfig;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
  * 获取地址类
- * 
+ *
  * @author zhy
  */
 public class AddressUtils
@@ -31,7 +31,7 @@ public class AddressUtils
         {
             return "内网IP";
         }
-        if (FileConfig.isAddressEnabled())
+        if (FilePropertits.isAddressEnabled())
         {
             try
             {

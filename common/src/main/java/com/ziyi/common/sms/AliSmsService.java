@@ -4,7 +4,7 @@ import com.aliyun.dysmsapi20170525.Client;
 import com.aliyun.dysmsapi20170525.models.SendSmsRequest;
 import com.aliyun.dysmsapi20170525.models.SendSmsResponse;
 import com.aliyun.teaopenapi.models.Config;
-import com.ziyi.common.Constants.SmsConstants;
+import com.ziyi.common.constants.SmsConstants;
 import com.ziyi.common.base.exception.util.BaseException;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;

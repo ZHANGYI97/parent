@@ -1,7 +1,7 @@
 package com.ziyi.common.file;
 
-import com.ziyi.common.Constants.GenConstants;
-import com.ziyi.config.FileConfig;
+import com.ziyi.common.constants.GenConstants;
+import com.ziyi.common.propertits.FilePropertits;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -59,7 +59,7 @@ public class ImageUtils
 
     /**
      * 读取文件为字节数据
-     * 
+     *
      * @param url 地址
      * @return 字节数据
      */
@@ -82,7 +82,7 @@ public class ImageUtils
             else
             {
                 // 本机地址
-                String localPath = FileConfig.getProfile();
+                String localPath = FilePropertits.getProfile();
                 String downloadPath = localPath + StringUtils.substringAfter(url, GenConstants.RESOURCE_PREFIX);
                 in = new FileInputStream(downloadPath);
             }

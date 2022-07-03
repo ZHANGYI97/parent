@@ -18,6 +18,18 @@ spring:
     ###密码windows
     password: 123456
     connect-timeout: 30000
+  kafka:
+    bootstrap-servers: 172.20.10.14:9093,172.20.10.15:9094,172.20.10.16:9095
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+    consumer:
+      group-id: test
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+  data:
+    mongodb:
+      uri: mongodb://127.0.0.1:27017/admin
 
 mybatis:
   mapper-locations: classpath:mapping/*/*.xml
@@ -31,6 +43,8 @@ logging:
     com:
       ziyi:
         mapper: debug
+  logstash:
+    address: 127.0.0.1:4560
 
 ziyi:
   # 名称

@@ -1,7 +1,6 @@
 package com.ziyi.redis.aop;
 
-import com.ziyi.common.Constants.Constants;
-import com.ziyi.redis.enums.RedisTypeEnum;
+import com.ziyi.common.constants.Constants;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

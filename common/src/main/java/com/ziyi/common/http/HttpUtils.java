@@ -1,6 +1,6 @@
 package com.ziyi.common.http;
 
-import com.ziyi.common.Constants.GenConstants;
+import com.ziyi.common.constants.GenConstants;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -14,7 +14,7 @@ import java.security.cert.X509Certificate;
 
 /**
  * 通用http发送方法 URLConnection实现
- * 
+ *
  * @author zhy
  */
 public class HttpUtils

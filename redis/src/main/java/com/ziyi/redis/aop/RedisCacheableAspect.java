@@ -1,6 +1,6 @@
 package com.ziyi.redis.aop;
 
-import com.ziyi.common.Constants.Constants;
+import com.ziyi.common.constants.Constants;
 import com.ziyi.common.string.StringUtils;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;

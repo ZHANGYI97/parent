@@ -1,21 +1,17 @@
 package com.ziyi.common.email;
 
 import com.ziyi.common.base.exception.util.BaseException;
-import com.ziyi.config.EmailConfig;
+import com.ziyi.common.propertits.EmailPropertits;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.mail.SimpleMailMessage;
-import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
-import java.util.prefs.BackingStoreException;
 
 /**
  * 邮件发送服务
@@ -26,7 +22,7 @@ public class SendEmail {
     private static final Logger logger = LoggerFactory.getLogger(SendEmail.class);
 
     @Resource
-    private EmailConfig emailConfig;
+    private EmailPropertits emailConfig;
 
     /**
      *

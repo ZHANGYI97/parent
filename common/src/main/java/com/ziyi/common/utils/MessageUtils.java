@@ -1,12 +1,12 @@
 package com.ziyi.common.utils;
 
-import com.ziyi.config.BeanFactory;
+import com.ziyi.common.propertits.BeanFactory;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
 
 /**
  * 获取i18n资源文件
- * 
+ *
  * @author zhy
  */
 public class MessageUtils

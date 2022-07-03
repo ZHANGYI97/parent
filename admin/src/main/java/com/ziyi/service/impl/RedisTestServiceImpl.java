@@ -1,7 +1,6 @@
 package com.ziyi.service.impl;
 
-import com.ziyi.common.Constants.Constants;
-import com.ziyi.entity.User;
+import com.ziyi.common.constants.Constants;
 import com.ziyi.entity.Users;
 import com.ziyi.mapper.UsersMapper;
 import com.ziyi.redis.aop.RedisCacheable;

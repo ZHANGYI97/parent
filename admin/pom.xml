@@ -70,6 +70,18 @@
         </dependency>
 
         <dependency>
+            <groupId>com.ziyi</groupId>
+            <artifactId>elasticsearch</artifactId>
+            <version>${ziyi.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.ziyi</groupId>
+            <artifactId>mongodb</artifactId>
+            <version>${ziyi.version}</version>
+        </dependency>
+
+        <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <scope>test</scope>
