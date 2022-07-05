@@ -1,0 +1,22 @@
+{
+  "groups": [],
+  "properties": [
+    {
+      "name": "zi.no.enabled",
+      "description": "Whether no client is enabled.",
+      "defaultValue": true
+    },
+    {
+      "name": "zi.snowflake.workId",
+      "description": "snowflake work id .",
+      "type": "java.lang.Long",
+      "defaultValue": 1
+    },
+    {
+      "name": "zi.snowflake.dataCenterId",
+      "description": "snowflake dataCenterId.",
+      "defaultValue": 1,
+      "type": "java.lang.Long"
+    }
+  ]
+}

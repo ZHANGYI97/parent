@@ -1,0 +1,4 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+  com.ziyi.config.web.configuration.SpringUtilsConfiguration,\
+  com.ziyi.config.web.configuration.ZiIdConfiguration,\
+  com.ziyi.config.web.configuration.ZiSerialNoConfiguration

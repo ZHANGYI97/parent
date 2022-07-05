@@ -26,9 +26,9 @@ public class MongoDBServiceImpl implements MongoDBService {
 
     @Override
     public String insert(UserPO userPO) {
-        String id = IdGenUtils.uuidGen().uuid();
+        String id = IdGenUtils.snowflakeGen().nextIdStr();
         userPO.setId(id);
-        //mongoTemplate.insert(userPO);
+        mongoDBUtils.save(userPO);
         return id;
     }
 
@@ -36,7 +36,6 @@ public class MongoDBServiceImpl implements MongoDBService {
     public UserPO query(String id) {
         UserPO userPO = new UserPO();
         userPO.setId(id);
-        Query query = new Query(Criteria.where("_id").is(id));
         return mongoDBUtils.findOne((JSONObject) JSONObject.toJSON(userPO), UserPO.class);
     }
 
