@@ -173,6 +173,12 @@
             <artifactId>guava</artifactId>
             <version>30.1.1-jre</version>
         </dependency>
+
+        <dependency>
+            <groupId>com.ziyi</groupId>
+            <artifactId>api</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
     </dependencies>
 
 

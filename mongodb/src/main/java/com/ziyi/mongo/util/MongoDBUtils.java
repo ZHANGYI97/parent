@@ -89,6 +89,14 @@ public class MongoDBUtils {
     }
 
     /**
+     * 存储数据
+     * @param obj
+     */
+    public void save(Object obj, String index) {
+        mongoTemplate.save(obj, index);
+    }
+
+    /**
      * 更新数据
      * @param updateJson:需要更新的数据
      * @param queryJson:查询的数据

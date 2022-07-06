@@ -2,20 +2,28 @@ package com.ziyi.config.web.handler;
 
 import cn.hutool.core.util.ArrayUtil;
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.google.common.collect.Lists;
+import com.ziyi.api.domain.entity.MongoEntity;
+import com.ziyi.common.date.DateUtils;
+import com.ziyi.common.enums.ServletTypeEnum;
+import com.ziyi.mongo.service.ConfigMongoDBService;
 import io.swagger.annotations.ApiOperation;
 import lombok.experimental.UtilityClass;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.poi.ss.formula.functions.T;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
+import org.slf4j.MDC;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.annotation.Order;
 import org.springframework.lang.Nullable;
 import org.springframework.util.ClassUtils;
-import org.springframework.util.StringUtils;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
@@ -53,6 +61,9 @@ public class ZiWebServletLogHandler {
 
     private static final String UNKNOWN = "unknown";
 
+    @Autowired
+    ConfigMongoDBService configMongoDBService;
+
     /**
      * create a pointcut
      */
@@ -61,10 +72,10 @@ public class ZiWebServletLogHandler {
 
     @Around("method()")
     public Object around(ProceedingJoinPoint point) throws Throwable {
+        HttpServletRequest request = Optional.ofNullable(RequestContextHolder.getRequestAttributes())
+                .filter(ServletRequestAttributes.class::isInstance).map(ServletRequestAttributes.class::cast)
+                .map(ServletRequestAttributes::getRequest).orElse(null);
         if (log.isInfoEnabled()) {
-            HttpServletRequest request = Optional.ofNullable(RequestContextHolder.getRequestAttributes())
-                    .filter(ServletRequestAttributes.class::isInstance).map(ServletRequestAttributes.class::cast)
-                    .map(ServletRequestAttributes::getRequest).orElse(null);
             log.info("------------------------------------------------------------------------------------VVV");
             if (null != request) {
                 log.info("////  request ip[请求来源客户端IP]>>>>  [{}:{}]", getIp(request), request.getRemotePort());
@@ -87,6 +98,14 @@ public class ZiWebServletLogHandler {
                         .map(arg -> arg instanceof String ? (String) arg : JSON.toJSONString(arg))
                         .collect(Collectors.joining(", "));
                 log.info("{}", argsStr);
+                Object[] reqArr = new Object[point.getArgs().length];
+                for (int i=0;i < point.getArgs().length;i++ ) {
+                    if (!(point.getArgs()[i] instanceof ServletRequest)) {
+                        reqArr[i] = point.getArgs()[i];
+                    }
+                }
+                //todo 存储入参
+                saveLog(ServletTypeEnum.REQUET, request.getRequestURI(), 0, reqArr);
             }
         }
         long startTime = System.currentTimeMillis();
@@ -96,8 +115,20 @@ public class ZiWebServletLogHandler {
             log.info("////  request time[耗时]>>>>  [{}] ms, request response[请求返参]:{}", (endTime - startTime),
                     JSON.toJSONString(obj));
             log.info("------------------------------------------------------------------------------------^^^\n\n");
+            //todo 存储反参
         }
+        saveLog(ServletTypeEnum.RESPONSE, request.getRequestURI(), 0, obj);
         return obj;
+    }
+
+    private void saveLog(ServletTypeEnum servletTypeEnum, String requetMethod, long timeConsuming, Object data){
+        String traceId = MDC.get("traceId");
+        String servletType = servletTypeEnum.name();
+        String methodName = requetMethod.replaceAll("/", ".");
+        if (StringUtils.isNotEmpty(methodName) && methodName.startsWith(".")) {
+            methodName = methodName.substring(1);
+        }
+        configMongoDBService.save(new MongoEntity<>(traceId, methodName, servletType, data, timeConsuming, DateUtils.getTime()), methodName);
     }
 
     private static String getIp(HttpServletRequest request) {
@@ -141,7 +172,7 @@ public class ZiWebServletLogHandler {
         @Nullable
         public String getSwaggerApiOperationName(JoinPoint point) {
             return Optional.ofNullable(getAnnotation(point, ApiOperation.class)).map(ApiOperation::value)
-                    .filter(StringUtils::hasText).orElse(null);
+                    .filter(org.springframework.util.StringUtils::hasText).orElse(null);
         }
     }
 }

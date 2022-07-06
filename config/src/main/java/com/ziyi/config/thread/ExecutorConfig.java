@@ -1,4 +1,4 @@
-package com.ziyi.common.config;
+package com.ziyi.config.thread;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

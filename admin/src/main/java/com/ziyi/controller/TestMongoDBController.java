@@ -1,7 +1,7 @@
 package com.ziyi.controller;
 
 import com.ziyi.api.domain.po.UserPO;
-import com.ziyi.common.ResultDate;
+import com.ziyi.common.model.ResultData;
 import com.ziyi.service.MongoDBService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,8 +25,8 @@ public class TestMongoDBController {
     }
 
     @GetMapping("/query")
-    public UserPO query(@RequestParam String id){
-        return mongoDBService.query(id);
+    public ResultData<UserPO> query(@RequestParam String id){
+        return ResultData.succeed(mongoDBService.query(id));
     }
 
     @GetMapping("/queryByPage")

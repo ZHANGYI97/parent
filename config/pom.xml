@@ -32,7 +32,7 @@
 
         <dependency>
             <groupId>com.ziyi</groupId>
-            <artifactId>redis</artifactId>
+            <artifactId>mongodb</artifactId>
             <version>${ziyi.version}</version>
         </dependency>
     </dependencies>
