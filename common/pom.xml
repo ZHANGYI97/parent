@@ -168,6 +168,7 @@
             <artifactId>commons-lang3</artifactId>
         </dependency>
 
+        <!--event bus总线-->
         <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>

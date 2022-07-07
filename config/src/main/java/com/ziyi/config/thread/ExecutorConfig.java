@@ -1,5 +1,6 @@
 package com.ziyi.config.thread;
 
+import com.ziyi.common.eventBus.utils.EventBusUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -56,6 +57,7 @@ public class ExecutorConfig {
         executor.setRejectedExecutionHandler(new ThreadPoolExecutor.CallerRunsPolicy());
         //执行初始化
         executor.initialize();
+        EventBusUtil.setExecutor(executor);
         return executor;
     }
 
