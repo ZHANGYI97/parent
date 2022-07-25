@@ -1,13 +1,10 @@
 package com.ziyi.leetcode;
 
-import java.util.Arrays;
-import java.util.List;
-
 /**
  * @author zhy
  * @data 2022/7/16 11:19
  */
-public class Solution {
+public class Volume {
 
     public static void main(String[] args) {
         int[] a = {1,8,6,2,5,4,8,3,7};
