@@ -33,6 +33,11 @@ public class Lock implements Comparable<Lock> {
      */
     private Date expires;
 
+    /**
+     * 是否上锁成功
+     */
+    private boolean flag;
+
     @Override
     public int compareTo(@NonNull Lock lock) {
         return expires.compareTo(lock.getExpires());
@@ -53,7 +58,7 @@ public class Lock implements Comparable<Lock> {
      * @return 锁对象
      */
     public static Lock newLock(String name) {
-        return new Lock(name, UUID.randomUUID().toString(), new Date());
+        return new Lock(name, UUID.randomUUID().toString(), new Date(), true);
     }
 
     /**
@@ -64,7 +69,7 @@ public class Lock implements Comparable<Lock> {
      * @return 锁对象
      */
     public static Lock newLock(String name, String value) {
-        return new Lock(name, value, new Date());
+        return new Lock(name, value, new Date(), true);
     }
 
     /**
@@ -76,6 +81,6 @@ public class Lock implements Comparable<Lock> {
      * @return 锁对象
      */
     public static Lock newLock(String name, String value, Date expires) {
-        return new Lock(name, value, expires);
+        return new Lock(name, value, expires, true);
     }
 }

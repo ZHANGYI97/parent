@@ -144,7 +144,7 @@
         </encoder>
     </appender>-->
 
-    <logger name="com.ziyi" level="INFO"/>
+    <logger name="com.ziyi" level="DEBUG"/>
     <logger name="com.alibaba" level="WARN"/>
     <Logger name="com.netflix" level="WARN"/>
     <Logger name="com.netflix.discovery.DiscoveryClient" level="ERROR"/>

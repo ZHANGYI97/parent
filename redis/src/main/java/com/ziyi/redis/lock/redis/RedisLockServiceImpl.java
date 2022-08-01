@@ -19,6 +19,7 @@ import org.springframework.util.ObjectUtils;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -37,7 +38,7 @@ public class RedisLockServiceImpl implements LockService {
     /**
      * 默认失效时间
      */
-    private final static int EXPIRY = 15;
+    private final static int EXPIRY = 3600;
 
     /**
      * 释放锁LUA脚本
@@ -53,10 +54,12 @@ public class RedisLockServiceImpl implements LockService {
             result = setIfAbsent(lock, EXPIRY);
         } catch (Exception e) {
             log.error("//// catch a error when create redis lock, cause by :", e);
+            lock.setFlag(false);
             throw new ZiRuntimeException(MsgCodeConstants.LOCK_OPERATE_ERROR, e.getMessage());
         }
         if (!result) {
-            throw new LockExistsException(lock.lockKey());
+            lock.setFlag(false);
+            throw new LockExistsException("lock exists" + lock.lockKey());
         }
         log.debug("//// create lock {} success", lock.lockKey());
         return lock;
@@ -86,7 +89,9 @@ public class RedisLockServiceImpl implements LockService {
     public void release(@NonNull Lock lock) {
         List<String> keys = Lists.newArrayList(lock.lockKey());
         RedisScript<Long> script = new DefaultRedisScript<>(RELEASE_LOCK_LUA_SCRIPT, Long.class);
-        if (0 == Optional.ofNullable(redisTemplate.execute(script, keys, lock.getValue())).orElse(0L)) {
+        long a = redisTemplate.execute(script, keys, lock.getValue());
+        long l = Optional.ofNullable(a).orElse(0L);
+        if (0 == l) {
             //解锁失败
             throw new ZiRuntimeException(MsgCodeConstants.LOCK_OPERATE_ERROR, "release fail");
         }
@@ -109,6 +114,24 @@ public class RedisLockServiceImpl implements LockService {
             log.error("//// refresh lock fail, do not fund effective lock");
             throw new ZiRuntimeException(MsgCodeConstants.LOCK_OPERATE_ERROR, "no lock");
         }
+    }
+
+    /**
+     * 判断锁是否存在
+     * @param key
+     * @return
+     */
+    public boolean isLock(String key) {
+        Lock lock = Lock.newLock(key, UUID.randomUUID().toString());
+        log.debug("//// judge lock name is {},lock key is {},lock expires is {}", key, lock.lockKey(), lock.getExpires());
+        boolean flag;
+        try {
+            flag = setIfAbsent(lock, EXPIRY);
+        } catch (Exception e) {
+            log.error("//// catch a error when create redis lock, cause by :", e);
+            throw new ZiRuntimeException(MsgCodeConstants.LOCK_OPERATE_ERROR, e.getMessage());
+        }
+        return !flag;
     }
 
     /**

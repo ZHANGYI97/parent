@@ -31,6 +31,13 @@ public interface LockService {
     Lock create(String name, String value);
 
     /**
+     * 判断锁是否存在
+     * @param key
+     * @return
+     */
+    boolean isLock(String key);
+
+    /**
      * 等待获取锁
      *
      * @param name    锁名称
@@ -92,7 +99,7 @@ public interface LockService {
      * @param value 锁值
      */
     default void releaseLock(String name, String value) {
-        release(new Lock(name, value, new Date()));
+        release(new Lock(name, value, new Date(), true));
     }
 
     /**
@@ -102,7 +109,7 @@ public interface LockService {
      * @param value 锁值
      */
     default void release(String name, String value) {
-        release(new Lock(name, value, new Date()));
+        release(new Lock(name, value, new Date(), true));
     }
 
     // endregion
