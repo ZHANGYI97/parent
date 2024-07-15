@@ -23,9 +23,9 @@ public class TestEmailController {
     public String testSendEmail(){
         try {
             sendEmail.sendSimpleEmail("jurzis@163.com",
-                    "761769823@qq.com",
+                    "2583801303@qq.com",
                     "测试简单邮件发送",
-                    "儿啊，爸爸邮件发成功了");
+                    "啦啦啦啦啦啦，我给你发邮件啦");
         } catch (Exception e) {
             logger.error(e.getMessage());
             return "send failed";
