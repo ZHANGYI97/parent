@@ -87,11 +87,11 @@ apache:
 
 alipay:
   #应用ID,您的APPID，收款账号既是您的APPID对应支付宝账号
-  app-id: 2016102300743022
+  app-id:
   #商户私钥，您的PKCS8格式RSA2私钥  刚刚生成的私钥直接复制填写
-  merchant-private-key: MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA4xOlTiFojhKjuaEODEXFSalP4pNZE7JNX5mDlWgCgQjqFGcjBLpxiPNsprOQolSkLUl2Xzy/3u7Wy9vd0MUxVcx+51XYPqyibT1cKa7YcumYwfeAKt2YT1cXif43kNRCGVwnHqhUuIUmiZZza/o4ROezVlpJpgPBzz+iVlyfaUZVcpAo0v/YGLSoSr4OOUa5544vzwCDiIYzqzyz0d9H9HyZNSySspieb8JkJzOvcXD19OD474HU+pTAkkV0R6PxsjfGM16FjaoO2kpgsptDJJqPTA8XhWMj3feepLv2EFZc6uM64zkLAqxll6u7R95C8eKCvYBqNa7A5Hv2diURswIDAQAB
+  merchant-private-key:
   #支付宝公钥,对应APPID下的支付宝公钥
-  alipay-public-key: MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAjr+sH/NWlQtmtxv10lugNlT/CYg58dJC282v8InO43odN2BranjTHAEcEqo0iozMzAe//ykJdLz5rojoaZ6FO5wMlfZbQM4bGPemsF2tiPsVP5joH2fyhFgQ9N7YnNL9u7Q06bY4riXU9fmyYYAJKT4nuffTLlNxJ+1faBLTAS/U3fC+S8dXv1apyuQEsTrLKgEydbCYCuHyb5MBLiIOTQhmaB4IHv/wWsX3IiUGw6xvgafrHrNSTDYcB+Dt1kwa1XHogL1zLF22qzBceq29GSKZTA4xo5O02YLTA3sJ2xafPNvakNmyHHNo+p/tVlumLkGmCual6BXyNa0Cf5jNewIDAQAB
+  alipay-public-key:
   #编码格式
   charset: utf-8
   #支付宝网关
